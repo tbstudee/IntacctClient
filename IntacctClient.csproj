@@ -43,6 +43,7 @@
     <Compile Include="Entities\IntacctDate.cs" />
     <Compile Include="Entities\IntacctInvoice.cs" />
     <Compile Include="Entities\IntacctLineItem.cs" />
+    <Compile Include="Entities\IntacctVendor.cs" />
     <Compile Include="Infrastructure\IntacctNameAttribute.cs" />
     <Compile Include="IIntacctServiceResponse.cs" />
     <Compile Include="IIntacctSession.cs" />
@@ -50,6 +51,7 @@
     <Compile Include="IntacctServiceException.cs" />
     <Compile Include="Operations\CreateCustomerOperation.cs" />
     <Compile Include="Operations\CreateInvoiceOperation.cs" />
+    <Compile Include="Operations\CreateVendorOperation.cs" />
     <Compile Include="Operations\GetEntityOperation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ChildCompanyType.cs" />

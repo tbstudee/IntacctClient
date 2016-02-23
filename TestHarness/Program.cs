@@ -25,19 +25,21 @@ namespace TestHarness
 
 			Console.WriteLine($"Session created, ID: {session.SessionId}, Endpoint: {session.EndpointUri}");
 
+		    IIntacctServiceResponse response = null;
+		    IntacctCustomer customer = null;
 			// create customer
-			var customer = new IntacctCustomer("C0021", "MT Test " + Guid.NewGuid())
-				               {
-					               ExternalId = "1337",
-					               PrimaryContact = new IntacctContact(Guid.NewGuid().ToString(), "Random")
-				               };
-			var response = client.ExecuteOperations(new[] { new CreateCustomerOperation(session, customer) }, CancellationToken.None).Result;
+			//var customer = new IntacctCustomer("C0021", "MT Test " + Guid.NewGuid())
+			//	               {
+			//		               ExternalId = "1337"
+			//		               //PrimaryContact = new IntacctContact(Guid.NewGuid().ToString(), "Random")
+			//	               };
+			//var response = client.ExecuteOperations(new[] { new CreateCustomerOperation(session, customer) }, CancellationToken.None).Result;
 
-			Console.WriteLine($"Customer created: {response.Success}");
-			if (!response.Success) return;
+			//Console.WriteLine($"Customer created: {response.Success}");
+			//if (!response.Success) return;
 
 			// retrieve customer
-			response = client.ExecuteOperations(new[] { new GetEntityOperation<IntacctCustomer>(session, customer.Id) }, CancellationToken.None).Result;
+			response = client.ExecuteOperations(new[] { new GetEntityOperation<IntacctCustomer>(session, "2") }, CancellationToken.None).Result;
 			Console.WriteLine($"Customer retrieved: {response.Success}");
 			if (!response.Success) return;
 
