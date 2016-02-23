@@ -10,7 +10,13 @@ namespace Intacct.Entities
 	{
 		[IntacctName("customerid")]
 		public string Id { get; set; }
-		public string Name { get; set; }
+        public string Name { get; set; }
+        public string ParentId { get; set; }
+        public string TermName { get; set; }
+        public string CustRepId { get; set; }
+        public string AccountLabel { get; set; }
+        public string GLAccountNo { get; set; }
+        public string Status { get; set; }
 		public string ExternalId { get; set; }
 
 		public IntacctContact PrimaryContact { get; set; }
@@ -45,13 +51,13 @@ namespace Intacct.Entities
 				               {
 					               new XElement("customerid", Id),
 					               new XElement("name", Name),
-					               new XElement("externalid", ExternalId),
-				               };
-
-			if (PrimaryContact != null)
-			{
-				elements.Add(new XElement("primary", new XElement("contact", PrimaryContact.ToXmlElements().Cast<object>())));
-			}
+                                   new XElement("parentid", ParentId),
+                                   new XElement("termname", TermName),
+                                   new XElement("custrepid", CustRepId),
+                                   new XElement("accountlabel", AccountLabel),
+                                   new XElement("externalid", ExternalId),
+                                   new XElement("primary", PrimaryContact?.ToXmlElements().Cast<object>()),
+                               };
 
 			return elements.ToArray();
 		}
