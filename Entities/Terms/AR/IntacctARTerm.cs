@@ -62,7 +62,7 @@ namespace Intacct.Entities.Terms.AR
             {
                 switch (discountCalculatedOnElement.Value.ToLower())
                 {
-                    case "invoice iotal":
+                    case "invoice total":
                         DiscountCalculatedOn = DiscountCalculatedOn.InvoiceTotal;
                         break;
                     default:
@@ -77,7 +77,7 @@ namespace Intacct.Entities.Terms.AR
             {
                 new XElement("name", Name),
                 new XElement("description", Description),
-                //todo fix this shit
+                //todo: fix this shit
                 new XElement("status", "active"),
                 new XElement("due", Terms.ToXmlElements().Cast<object>())
             };
