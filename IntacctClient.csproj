@@ -1,3 +1,4 @@
+
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -34,24 +35,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .NET Framework is automatically included -->
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Entities\IntacctAddress.cs" />
+    <Compile Include="Entities\Terms\AR\IntacctARTerm.cs" />
     <Compile Include="Entities\IntacctContact.cs" />
     <Compile Include="Entities\IntacctCustomer.cs" />
     <Compile Include="Entities\IntacctDate.cs" />
     <Compile Include="Entities\IntacctInvoice.cs" />
     <Compile Include="Entities\IntacctLineItem.cs" />
-    <Compile Include="Entities\IntacctVendor.cs" />
+    <Compile Include="Entities\Terms\Discount.cs" />
+    <Compile Include="Entities\Terms\DiscountCalculatedOn.cs" />
+    <Compile Include="Entities\Terms\Terms.cs" />
     <Compile Include="Infrastructure\IntacctNameAttribute.cs" />
     <Compile Include="IIntacctServiceResponse.cs" />
     <Compile Include="IIntacctSession.cs" />
     <Compile Include="Infrastructure\LambdaExtensions.cs" />
     <Compile Include="IntacctServiceException.cs" />
+    <Compile Include="Operations\CreateARTermOperation.cs" />
     <Compile Include="Operations\CreateCustomerOperation.cs" />
     <Compile Include="Operations\CreateInvoiceOperation.cs" />
-    <Compile Include="Operations\CreateVendorOperation.cs" />
     <Compile Include="Operations\GetEntityOperation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ChildCompanyType.cs" />
@@ -66,6 +67,18 @@
     <Compile Include="Operations\IntacctOperationResult.cs" />
     <Compile Include="IntacctError.cs" />
     <Compile Include="ResponseParser.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.7.0.1\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entities\Terms\AP\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
