@@ -34,9 +34,9 @@ namespace Intacct.Entities.Terms
 
         public Discount(XElement data)
         {
-            this.SetPropertyValue(d => d.DaysForward, data);
-            this.SetPropertyValue(d => d.DiscountAmount, data);
-            this.SetPropertyValue(d => d.GraceDays, data);
+            this.SetPropertyValue(d => d.DaysForward, data, true);
+            this.SetPropertyValue(d => d.DiscountAmount, data, true);
+            this.SetPropertyValue(d => d.GraceDays, data, true);
         }
 
         internal override XObject[] ToXmlElements()

@@ -24,7 +24,7 @@ namespace Intacct.Entities.Terms
             //if daysForward element exists then we know its net days from invoice data
             if (daysForward != null)
             {
-                NetDays = daysForward.ToString();
+                NetDays = daysForward.Value;
                 DueFrom = TermsDueFrom.InvoiceDate;
             }
             else
