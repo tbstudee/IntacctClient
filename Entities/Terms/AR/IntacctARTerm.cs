@@ -19,7 +19,6 @@ namespace Intacct.Entities.Terms.AR
         public string Name { get; set; }
         public string Description { get; set; }
         public ARTermStatus Status { get; set; }
-        [IntacctName("daysforward")]
         public Terms Terms { get; set; }
         public Discount Discount { get; set; }
         public DiscountCalculatedOn DiscountCalculatedOn { get; set; }

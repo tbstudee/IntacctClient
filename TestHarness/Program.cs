@@ -56,15 +56,17 @@ namespace TestHarness
 
             var term = new IntacctARTerm()
             {
-                Name = "NET60",
-                Description = "NET 60 Day terms.",
+                Name = "NET15OfMonth",
+                Description = "NET 15 of month test",
                 Status = ARTermStatus.Active,
-                Terms = new Terms("15", TermsDueFrom.OfNextMonth)
+                Terms = new Terms("15", TermsDueFrom.OfMonth)
             };
 
-		    var response = client.ExecuteOperations(new[] { new CreateARTermOperation(session, term) }, CancellationToken.None).Result;
+		    //var response = client.ExecuteOperations(new[] { new CreateARTermOperation(session, term) }, CancellationToken.None).Result;
 
-			response = client.ExecuteOperations(new[] { new GetEntityOperation<IntacctARTerm>(session, term.Name) }, CancellationToken.None).Result;
+			var response = client.ExecuteOperations(new[] { new GetEntityOperation<IntacctARTerm>(session, "NET15OfMonth") }, CancellationToken.None).Result;
+			response = client.ExecuteOperations(new[] { new GetEntityOperation<IntacctARTerm>(session, "NET30") }, CancellationToken.None).Result;
+			response = client.ExecuteOperations(new[] { new GetEntityOperation<IntacctARTerm>(session, "NET60") }, CancellationToken.None).Result;
 
 		    Console.ReadLine();
 		}
