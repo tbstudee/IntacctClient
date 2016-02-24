@@ -87,8 +87,6 @@ namespace Intacct.Entities.Terms.AR
             if (Discount != null)
             {
                 elements.Add(new XElement("discount", Discount.ToXmlElements().Cast<object>()));
-                if(DiscountCalculatedOn == null) throw new MissingMemberException($"Can't set the Discount without specifiying what the discount is calculated on.");
-
             }
 
             return elements.ToArray();
