@@ -19,17 +19,19 @@ namespace Intacct.Entities.Terms
         public string DiscountFrom { get; set; }
         [IntacctName("amount")]
         public string DiscountAmount { get; set; }
+        public DueFrom DiscountDueFrom { get; set; }
         public DiscountAmountUnit DiscountAmountUnit { get; set; }
 
         [IntacctName("gracedays")]
         public string GraceDays { get; set; }
 
-        public Discount(string daysForward, string percentAmount, DiscountAmountUnit discountAmountUnit, string graceDays)
+        public Discount(string daysForward, DueFrom dueFrom, string percentAmount, DiscountAmountUnit discountAmountUnit, string graceDays)
         {
             DaysForward = daysForward;
             DiscountAmount = percentAmount;
             GraceDays = graceDays;
             DiscountAmountUnit = discountAmountUnit;
+            DiscountDueFrom = dueFrom;
         }
 
         public Discount(XElement data)

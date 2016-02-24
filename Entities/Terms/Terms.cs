@@ -10,11 +10,11 @@ namespace Intacct.Entities.Terms
 {
     public class Terms : IntacctObject
     {
-        public string NetDays { get; set; }
+        public string DaysForward { get; set; }
         public DueFrom DueFrom { get; set; } 
         public Terms(string netDays, DueFrom dueFrom)
         {
-            NetDays = netDays;
+            DaysForward = netDays;
             DueFrom = dueFrom;
         }
 
@@ -24,7 +24,7 @@ namespace Intacct.Entities.Terms
             //if daysForward element exists then we know its net days from invoice data
             if (daysForward != null)
             {
-                NetDays = daysForward.Value;
+                DaysForward = daysForward.Value;
                 DueFrom = DueFrom.InvoiceDate;
             }
             else
@@ -32,7 +32,7 @@ namespace Intacct.Entities.Terms
                 var dayOfMonth = data.Element("dayofmonth");
                 if (dayOfMonth != null)
                 {
-                    NetDays = dayOfMonth.Value;
+                    DaysForward = dayOfMonth.Value;
                 }
                 var monthsForward = data.Element("monthsforward");
                 if (monthsForward != null)
@@ -69,7 +69,7 @@ namespace Intacct.Entities.Terms
         {
             var elements = new List<XObject>()
             {
-                new XElement("dueday", NetDays),
+                new XElement("dueday", DaysForward),
                 new XElement("duefrom", DueFrom.ToIntacctOptionString())
             };
 
