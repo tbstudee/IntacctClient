@@ -59,12 +59,12 @@ namespace TestHarness
                 Name = "NET60",
                 Description = "NET 60 Day terms.",
                 Status = ARTermStatus.Active,
-                Terms = new Terms("60", "from invoice/bill date")
+                Terms = new Terms("15", TermsDueFrom.OfNextMonth)
             };
 
 		    var response = client.ExecuteOperations(new[] { new CreateARTermOperation(session, term) }, CancellationToken.None).Result;
 
-			response = client.ExecuteOperations(new[] { new GetEntityOperation<IntacctCustomer>(session, term.Name) }, CancellationToken.None).Result;
+			response = client.ExecuteOperations(new[] { new GetEntityOperation<IntacctARTerm>(session, term.Name) }, CancellationToken.None).Result;
 
 		    Console.ReadLine();
 		}

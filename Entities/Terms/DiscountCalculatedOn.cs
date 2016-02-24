@@ -8,6 +8,7 @@ namespace Intacct.Entities.Terms
 {
     public enum DiscountCalculatedOn
     {
-        InvoiceTotal
+        InvoiceTotalWithAddedCharges,
+        LineItemsTotalExcludingAddedCharges
     }
 }

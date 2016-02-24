@@ -7,7 +7,7 @@ namespace Intacct.Operations
     {
         private readonly IntacctARTerm _term;
 
-        public CreateARTermOperation(IIntacctSession session, IntacctARTerm term) : base(session, "create_arterm", "key")
+        public CreateARTermOperation(IIntacctSession session, IntacctARTerm term) : base(session, "create_arterm", "key", true)
         {
             _term = term;
         }

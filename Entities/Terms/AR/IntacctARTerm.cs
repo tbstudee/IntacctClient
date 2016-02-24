@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
@@ -11,7 +12,7 @@ namespace Intacct.Entities.Terms.AR
         Inactive,
         Active
     }
-
+    [IntacctName("arterm")]
     public class IntacctARTerm : IntacctObject
     {
 
@@ -63,7 +64,10 @@ namespace Intacct.Entities.Terms.AR
                 switch (discountCalculatedOnElement.Value.ToLower())
                 {
                     case "invoice total":
-                        DiscountCalculatedOn = DiscountCalculatedOn.InvoiceTotal;
+                        DiscountCalculatedOn = DiscountCalculatedOn.InvoiceTotalWithAddedCharges;
+                        break;
+                    case "line items total":
+                        DiscountCalculatedOn = DiscountCalculatedOn.LineItemsTotalExcludingAddedCharges;
                         break;
                     default:
                         break;
@@ -77,14 +81,15 @@ namespace Intacct.Entities.Terms.AR
             {
                 new XElement("name", Name),
                 new XElement("description", Description),
-                //todo: fix this shit
-                new XElement("status", "active"),
+                new XElement("status", Status.ToIntacctOptionString()),
                 new XElement("due", Terms.ToXmlElements().Cast<object>())
             };
 
             if (Discount != null)
             {
                 elements.Add(new XElement("discount", Discount.ToXmlElements().Cast<object>()));
+                if(DiscountCalculatedOn == null) throw new MissingMemberException($"Can't set the Discount without specifiying what the discount is calculated on.");
+
             }
 
             return elements.ToArray();

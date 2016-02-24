@@ -12,8 +12,8 @@ namespace Intacct.Entities.Terms
     {
         [IntacctName("dueday")]
         public string NetDays { get; set; }
-        public string DueFrom { get; set; } 
-        public Terms(string netDays, string dueFrom)
+        public TermsDueFrom DueFrom { get; set; } 
+        public Terms(string netDays, TermsDueFrom dueFrom)
         {
             NetDays = netDays;
             DueFrom = dueFrom;
@@ -21,14 +21,18 @@ namespace Intacct.Entities.Terms
 
         public Terms(XElement data)
         {
-            this.SetPropertyValue(x => x.NetDays, data);
+            var netDays = data.Element("daysforward");
+            if (netDays != null && !netDays.IsEmpty)
+            {
+                NetDays = netDays.ToString();
+            }
         }
         internal override XObject[] ToXmlElements()
         {
             var elements = new List<XObject>()
             {
                 new XElement("dueday", NetDays),
-                new XElement("duefrom", DueFrom)
+                new XElement("duefrom", DueFrom.ToIntacctOptionString())
             };
 
             return elements.ToArray();
