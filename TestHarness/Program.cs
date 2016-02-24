@@ -56,10 +56,12 @@ namespace TestHarness
 
             var term = new IntacctARTerm()
             {
-                Name = "NET15OfMonth",
+                Name = "NET15OfMonthWithDiscount",
                 Description = "NET 15 of month test",
                 Status = ARTermStatus.Active,
-                Terms = new Terms("15", DueFrom.OfMonth)
+                Terms = new Terms("15", DueFrom.OfFifthMonth),
+                DiscountCalculatedOn = DiscountCalculatedOn.InvoiceTotalWithAddedCharges,
+                Discount = new Discount("15", DueFrom.OfSecondMonth, "5", DiscountAmountUnit.Percent, "0")
             };
 
 		    //var response = client.ExecuteOperations(new[] { new CreateARTermOperation(session, term) }, CancellationToken.None).Result;
@@ -67,6 +69,7 @@ namespace TestHarness
 			var response = client.ExecuteOperations(new[] { new GetEntityOperation<IntacctARTerm>(session, "NET15OfMonth") }, CancellationToken.None).Result;
 			response = client.ExecuteOperations(new[] { new GetEntityOperation<IntacctARTerm>(session, "NET30") }, CancellationToken.None).Result;
 			response = client.ExecuteOperations(new[] { new GetEntityOperation<IntacctARTerm>(session, "NET60") }, CancellationToken.None).Result;
+			response = client.ExecuteOperations(new[] { new GetEntityOperation<IntacctARTerm>(session, "NET15OfMonthWithDiscount") }, CancellationToken.None).Result;
 
 		    Console.ReadLine();
 		}

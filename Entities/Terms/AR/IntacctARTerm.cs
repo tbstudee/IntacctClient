@@ -87,6 +87,7 @@ namespace Intacct.Entities.Terms.AR
             if (Discount != null)
             {
                 elements.Add(new XElement("discount", Discount.ToXmlElements().Cast<object>()));
+                elements.Add(new XElement("disccalcon", DiscountCalculatedOn.ToIntacctOptionString()));
             }
 
             return elements.ToArray();

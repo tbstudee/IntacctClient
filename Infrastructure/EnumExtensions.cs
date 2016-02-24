@@ -36,9 +36,9 @@ namespace Intacct.Infrastructure
             switch (calcOn)
             {
                 case DiscountCalculatedOn.InvoiceTotalWithAddedCharges:
-                    return "invoice total";
+                    return "Invoice total";
                 case DiscountCalculatedOn.LineItemsTotalExcludingAddedCharges:
-                    return "line items total";
+                    return "Line items total";
                 default:
                     throw new InvalidDataException($"Unable to get Intacct option string from DiscountCalculatedOn value");
             }
