@@ -1,6 +1,6 @@
 ﻿namespace Intacct.Entities.Terms
 {
-    public enum TermsDueFrom
+    public enum DueFrom
     {
         InvoiceDate,
         OfMonth,

@@ -59,7 +59,7 @@ namespace TestHarness
                 Name = "NET15OfMonth",
                 Description = "NET 15 of month test",
                 Status = ARTermStatus.Active,
-                Terms = new Terms("15", TermsDueFrom.OfMonth)
+                Terms = new Terms("15", DueFrom.OfMonth)
             };
 
 		    //var response = client.ExecuteOperations(new[] { new CreateARTermOperation(session, term) }, CancellationToken.None).Result;

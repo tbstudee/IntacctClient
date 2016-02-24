@@ -44,28 +44,28 @@ namespace Intacct.Infrastructure
             }
         }
 
-        public static string ToIntacctOptionString(this TermsDueFrom dueFrom)
+        public static string ToIntacctOptionString(this DueFrom dueFrom)
         {
             switch (dueFrom)
             {
-                case TermsDueFrom.InvoiceDate:
+                case DueFrom.InvoiceDate:
                     return "from invoice/bill date";
-                case TermsDueFrom.OfMonth:
+                case DueFrom.OfMonth:
                     return "of the month of invoice/bill date";
-                case TermsDueFrom.OfNextMonth:
+                case DueFrom.OfNextMonth:
                     return "of next month from invoice/bill date";
-                case TermsDueFrom.OfSecondMonth:
+                case DueFrom.OfSecondMonth:
                     return "of 2nd month from invoice/bill date";
-                case TermsDueFrom.OfThirdMonth:
+                case DueFrom.OfThirdMonth:
                     return "of 3rd month from invoice/bill date";
-                case TermsDueFrom.OfFourthMonth:
+                case DueFrom.OfFourthMonth:
                     return "of 4th month from invoice/bill date";
-                case TermsDueFrom.OfFifthMonth:
+                case DueFrom.OfFifthMonth:
                     return "of 5th month from invoice/bill date";
-                case TermsDueFrom.OfSixthMonth:
+                case DueFrom.OfSixthMonth:
                     return "of 6th month from invoice/bill date";
                 default:
-                    throw new InvalidDataException($"Unable to get Intacct option string from TermsDueFrom value");
+                    throw new InvalidDataException($"Unable to get Intacct option string from DueFrom value");
             }
         }
     }

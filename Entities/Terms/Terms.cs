@@ -11,8 +11,8 @@ namespace Intacct.Entities.Terms
     public class Terms : IntacctObject
     {
         public string NetDays { get; set; }
-        public TermsDueFrom DueFrom { get; set; } 
-        public Terms(string netDays, TermsDueFrom dueFrom)
+        public DueFrom DueFrom { get; set; } 
+        public Terms(string netDays, DueFrom dueFrom)
         {
             NetDays = netDays;
             DueFrom = dueFrom;
@@ -25,7 +25,7 @@ namespace Intacct.Entities.Terms
             if (daysForward != null)
             {
                 NetDays = daysForward.Value;
-                DueFrom = TermsDueFrom.InvoiceDate;
+                DueFrom = DueFrom.InvoiceDate;
             }
             else
             {
@@ -40,25 +40,25 @@ namespace Intacct.Entities.Terms
                     switch (monthsForward.Value.ToLower())
                     {
                         case "0":
-                            DueFrom = TermsDueFrom.OfMonth;
+                            DueFrom = DueFrom.OfMonth;
                             break;
                         case "1":
-                            DueFrom = TermsDueFrom.OfNextMonth;
+                            DueFrom = DueFrom.OfNextMonth;
                             break;
                         case "2":
-                            DueFrom = TermsDueFrom.OfSecondMonth;
+                            DueFrom = DueFrom.OfSecondMonth;
                             break;
                         case "3":
-                            DueFrom = TermsDueFrom.OfThirdMonth;
+                            DueFrom = DueFrom.OfThirdMonth;
                             break;
                         case "4":
-                            DueFrom = TermsDueFrom.OfFourthMonth;
+                            DueFrom = DueFrom.OfFourthMonth;
                             break;
                         case "5":
-                            DueFrom = TermsDueFrom.OfFifthMonth;
+                            DueFrom = DueFrom.OfFifthMonth;
                             break;
                         case "6":
-                            DueFrom = TermsDueFrom.OfSixthMonth;
+                            DueFrom = DueFrom.OfSixthMonth;
                             break;
                     }
                 }
