@@ -1,5 +1,7 @@
 ﻿using System.IO;
+using Intacct.Entities;
 using Intacct.Entities.Terms;
+using Intacct.Entities.Terms.AP;
 using Intacct.Entities.Terms.AR;
 
 namespace Intacct.Infrastructure
@@ -18,29 +20,42 @@ namespace Intacct.Infrastructure
                     throw new InvalidDataException($"Unable to get Intacct option string from DiscountAmountUnit value");
             }
         }
-        public static string ToIntacctOptionString(this ARTermStatus status)
+        public static string ToIntacctOptionString(this TermStatus status)
         {
             switch (status)
             {
-                case ARTermStatus.Active:
+                case TermStatus.Active:
                     return "active";
-                case ARTermStatus.Inactive:
+                case TermStatus.Inactive:
                     return "inactive";
                 default:
-                    throw new InvalidDataException($"Unable to get Intacct option string from ARTermStatus value");
+                    throw new InvalidDataException($"Unable to get Intacct option string from TermStatus value");
             }
         }
 
-        public static string ToIntacctOptionString(this DiscountCalculatedOn calcOn)
+        public static string ToIntacctOptionString(this ARDiscountCalculatedOn calcOn)
         {
             switch (calcOn)
             {
-                case DiscountCalculatedOn.InvoiceTotalWithAddedCharges:
+                case ARDiscountCalculatedOn.InvoiceTotalWithAddedCharges:
                     return "Invoice total";
-                case DiscountCalculatedOn.LineItemsTotalExcludingAddedCharges:
+                case ARDiscountCalculatedOn.LineItemsTotalExcludingAddedCharges:
                     return "Line items total";
                 default:
-                    throw new InvalidDataException($"Unable to get Intacct option string from DiscountCalculatedOn value");
+                    throw new InvalidDataException($"Unable to get Intacct option string from ARDiscountCalculatedOn value");
+            }
+        }
+
+        public static string ToIntacctOptionString(this APDiscountCalculatedOn calcOn)
+        {
+            switch (calcOn)
+            {
+                case APDiscountCalculatedOn.BillTotalIncludingAllCharges:
+                    return "Bill total";
+                case APDiscountCalculatedOn.LineItemsTotalExcludingAddedCharges:
+                    return "Line items total";
+                default:
+                    throw new InvalidDataException($"Unable to get Intacct option string from APDiscountCalculatedOn value");
             }
         }
 

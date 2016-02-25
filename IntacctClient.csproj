@@ -36,6 +36,9 @@
   <ItemGroup>
     <Compile Include="Entities\IntacctAddress.cs" />
     <Compile Include="Entities\IntacctVendor.cs" />
+    <Compile Include="Entities\TermStatus.cs" />
+    <Compile Include="Entities\Terms\AP\APDiscountCalculatedOn.cs" />
+    <Compile Include="Entities\Terms\AP\IntacctAPTerm.cs" />
     <Compile Include="Entities\Terms\AR\IntacctARTerm.cs" />
     <Compile Include="Entities\IntacctContact.cs" />
     <Compile Include="Entities\IntacctCustomer.cs" />
@@ -43,7 +46,7 @@
     <Compile Include="Entities\IntacctInvoice.cs" />
     <Compile Include="Entities\IntacctLineItem.cs" />
     <Compile Include="Entities\Terms\Discount.cs" />
-    <Compile Include="Entities\Terms\DiscountCalculatedOn.cs" />
+    <Compile Include="Entities\Terms\AR\ARDiscountCalculatedOn.cs" />
     <Compile Include="Entities\Terms\Terms.cs" />
     <Compile Include="Entities\Terms\TermsDueFrom.cs" />
     <Compile Include="Infrastructure\EnumExtensions.cs" />
@@ -52,6 +55,7 @@
     <Compile Include="IIntacctSession.cs" />
     <Compile Include="Infrastructure\LambdaExtensions.cs" />
     <Compile Include="IntacctServiceException.cs" />
+    <Compile Include="Operations\CreateAPTermOperation.cs" />
     <Compile Include="Operations\CreateARTermOperation.cs" />
     <Compile Include="Operations\CreateCustomerOperation.cs" />
     <Compile Include="Operations\CreateInvoiceOperation.cs" />
@@ -79,9 +83,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Entities\Terms\AP\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

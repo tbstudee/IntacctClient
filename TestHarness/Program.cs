@@ -5,7 +5,8 @@ using System.Threading;
 using Intacct;
 using Intacct.Entities;
 using Intacct.Entities.Terms;
-using Intacct.Entities.Terms.AR;
+﻿using Intacct.Entities.Terms.AP;
+﻿using Intacct.Entities.Terms.AR;
 using Intacct.Operations;
 using Newtonsoft.Json;
 
@@ -54,22 +55,34 @@ namespace TestHarness
 			Console.WriteLine($"Invoice created: {response.Success}");
             */
 
-            var term = new IntacctARTerm()
+            /*
+            var arterm = new IntacctARTerm()
             {
                 Name = "NET15OfMonthWithDiscount",
                 Description = "NET 15 of month test",
-                Status = ARTermStatus.Active,
+                Status = TermStatus.Active,
                 Terms = new Terms("15", DueFrom.OfFifthMonth),
                 DiscountCalculatedOn = DiscountCalculatedOn.InvoiceTotalWithAddedCharges,
                 Discount = new Discount("15", DueFrom.OfSecondMonth, "5", DiscountAmountUnit.Percent, "0")
             };
+            */
+            var apterm = new IntacctAPTerm()
+            {
+                Name = "NET15OfMonthWithDiscount",
+                Description = "NET 15 of month AP test",
+                Status = TermStatus.Active,
+                Terms = new Terms("15", DueFrom.OfFifthMonth),
+                DiscountCalculatedOn = APDiscountCalculatedOn.BillTotalIncludingAllCharges,
+                Discount = new Discount("15", DueFrom.OfSecondMonth, "5", DiscountAmountUnit.Percent, "0")
+            };
 
-		    //var response = client.ExecuteOperations(new[] { new CreateARTermOperation(session, term) }, CancellationToken.None).Result;
+		    var response = client.ExecuteOperations(new[] { new CreateAPTermOperation(session, apterm) }, CancellationToken.None).Result;
 
-			var response = client.ExecuteOperations(new[] { new GetEntityOperation<IntacctARTerm>(session, "NET15OfMonth") }, CancellationToken.None).Result;
+			response = client.ExecuteOperations(new[] { new GetEntityOperation<IntacctAPTerm>(session, "NET15OfMonthWithDiscount") }, CancellationToken.None).Result;
+
+			response = client.ExecuteOperations(new[] { new GetEntityOperation<IntacctARTerm>(session, "NET15OfMonth") }, CancellationToken.None).Result;
 			response = client.ExecuteOperations(new[] { new GetEntityOperation<IntacctARTerm>(session, "NET30") }, CancellationToken.None).Result;
 			response = client.ExecuteOperations(new[] { new GetEntityOperation<IntacctARTerm>(session, "NET60") }, CancellationToken.None).Result;
-			response = client.ExecuteOperations(new[] { new GetEntityOperation<IntacctARTerm>(session, "NET15OfMonthWithDiscount") }, CancellationToken.None).Result;
 
 		    Console.ReadLine();
 		}

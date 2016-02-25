@@ -1,25 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 using Intacct.Infrastructure;
 
-namespace Intacct.Entities.Terms.AR
+namespace Intacct.Entities.Terms.AP
 {
-    [IntacctName("arterm")]
-    public class IntacctARTerm : IntacctObject
+    [IntacctName("apterm")]
+    public class IntacctAPTerm : IntacctObject
     {
-
         public string Name { get; set; }
         public string Description { get; set; }
         public TermStatus Status { get; set; }
         public Terms Terms { get; set; }
         public Discount Discount { get; set; }
-        public ARDiscountCalculatedOn DiscountCalculatedOn { get; set; }
-        public IntacctARTerm() { } 
+        public APDiscountCalculatedOn DiscountCalculatedOn { get; set; }
 
-        public IntacctARTerm(XElement data)
+        public IntacctAPTerm() {  }
+        public IntacctAPTerm(XElement data)
         {
             this.SetPropertyValue(x => x.Name, data);
             this.SetPropertyValue(x => x.Description, data);
@@ -36,7 +34,7 @@ namespace Intacct.Entities.Terms.AR
                         Status = TermStatus.Inactive;
                         break;
                     default:
-                        throw new InvalidDataException($"Unable to read AR Term status.");
+                        throw new InvalidDataException($"Unable to read AP Term status.");
                 }
             }
 
@@ -57,18 +55,18 @@ namespace Intacct.Entities.Terms.AR
             {
                 switch (discountCalculatedOnElement.Value.ToLower())
                 {
-                    case "invoice total":
-                        DiscountCalculatedOn = ARDiscountCalculatedOn.InvoiceTotalWithAddedCharges;
+                    case "Bill total":
+                        DiscountCalculatedOn = APDiscountCalculatedOn.BillTotalIncludingAllCharges;
                         break;
-                    case "line items total":
-                        DiscountCalculatedOn = ARDiscountCalculatedOn.LineItemsTotalExcludingAddedCharges;
+                    case "Line items total":
+                        DiscountCalculatedOn = APDiscountCalculatedOn.LineItemsTotalExcludingAddedCharges;
                         break;
                     default:
                         break;
                 }
             }
-        }
 
+        }
         internal override XObject[] ToXmlElements()
         {
             var elements = new List<XObject>()

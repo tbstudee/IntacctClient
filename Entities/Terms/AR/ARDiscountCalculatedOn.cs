@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Intacct.Entities.Terms
 {
-    public enum DiscountCalculatedOn
+    public enum ARDiscountCalculatedOn
     {
         InvoiceTotalWithAddedCharges,
         LineItemsTotalExcludingAddedCharges
