@@ -24,7 +24,7 @@ namespace TestHarness
 			var serverCredential = new NetworkCredential(settings.AccountUsername, settings.AccountPassword);
 			var userCredential = new IntacctUserCredential(settings.CompanyName, settings.Username, settings.Password);
 
-			var client = new IntacctClient(serverUri, serverCredential);
+			var client = new IntacctClient(serverUri, serverCredential, "2.1");
 
 			var session = client.InitiateApiSession(userCredential).Result;
 
@@ -86,14 +86,15 @@ namespace TestHarness
 			response = client.ExecuteOperations(new[] { new GetEntityOperation<IntacctARTerm>(session, "NET60") }, CancellationToken.None).Result;
             */
 
-		    var path = @"somepath";
+            throw new Exception("your own test code");
+		    var path = @"path";
 		    var extension = Path.GetExtension(path);
 		    var bytes = File.ReadAllBytes(path);
 		    var encodedFile = Convert.ToBase64String(bytes);
 
             var attachment = new Attachment()
             {
-                Name = "Doc1",
+                Name = "Doc2",
                 FileExtension = "jpg",
                 Data = encodedFile
             };
@@ -101,9 +102,9 @@ namespace TestHarness
 		    var attachments = new List<Attachment>() { attachment };
 		    var document = new IntacctSupportingDocument()
 		    {
-                Name = "Hey supporting Doc 1",
-                Id = "101",
-                Description = "This is a document description",
+                Name = "Hey supporting Doc 2",
+                Id = "102",
+                Description = "This is a document 2 description",
                 FolderName = "Certs",
                 Attachments = attachments
 		    };

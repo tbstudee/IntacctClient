@@ -18,11 +18,13 @@ namespace Intacct
 	{
 		private readonly Uri _apiUri;
 		private readonly NetworkCredential _serviceCredential;
+	    private readonly string _apiVersion;
 
-		public IntacctClient(Uri apiUri, NetworkCredential serviceCredential)
+		public IntacctClient(Uri apiUri, NetworkCredential serviceCredential, string apiVersion = "3.0")
 		{
 			_apiUri = apiUri;
 			_serviceCredential = serviceCredential;
+		    _apiVersion = apiVersion;
 		}
 
 		public async Task<IIntacctSession> InitiateApiSession(IntacctUserCredential cred)
@@ -74,7 +76,7 @@ namespace Intacct
 			var doc = new XDocument();
 
 			var request = new XElement("request",
-			                           GetControlElement(_serviceCredential, requestId));
+			                           GetControlElement(_serviceCredential, requestId, _apiVersion));
 			request.Add(operations.Select(op => op.GetOperationElement()));
 
 			doc.Add(request);
@@ -89,14 +91,14 @@ namespace Intacct
 			stream.Seek(0, SeekOrigin.Begin);
 		}
 
-		private static XElement GetControlElement(NetworkCredential serviceCredential, string requestId)
+		private static XElement GetControlElement(NetworkCredential serviceCredential, string requestId, string apiVersion)
 		{
 			var control = new XElement("control",
 			                           new XElement("senderid", serviceCredential.UserName),
 			                           new XElement("password", serviceCredential.Password),
 			                           new XElement("controlid", requestId),
 			                           new XElement("uniqueid", "false"),
-			                           new XElement("dtdversion", "2.1"));
+			                           new XElement("dtdversion", apiVersion));
 			return control;
 		}
 
