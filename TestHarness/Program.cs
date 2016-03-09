@@ -1,10 +1,12 @@
 ﻿﻿using System;
-using System.IO;
+﻿using System.Collections.Generic;
+﻿using System.IO;
 using System.Net;
 using System.Threading;
 using Intacct;
 using Intacct.Entities;
-using Intacct.Entities.Terms;
+﻿using Intacct.Entities.Supporting_Documents;
+﻿using Intacct.Entities.Terms;
 ﻿using Intacct.Entities.Terms.AP;
 ﻿using Intacct.Entities.Terms.AR;
 using Intacct.Operations;
@@ -65,7 +67,6 @@ namespace TestHarness
                 DiscountCalculatedOn = DiscountCalculatedOn.InvoiceTotalWithAddedCharges,
                 Discount = new Discount("15", DueFrom.OfSecondMonth, "5", DiscountAmountUnit.Percent, "0")
             };
-            */
             var apterm = new IntacctAPTerm()
             {
                 Name = "NET15OfMonthWithDiscount",
@@ -73,7 +74,7 @@ namespace TestHarness
                 Status = TermStatus.Active,
                 Terms = new Terms("15", DueFrom.OfFifthMonth),
                 DiscountCalculatedOn = APDiscountCalculatedOn.BillTotalIncludingAllCharges,
-                Discount = new Discount("15", DueFrom.OfSecondMonth, "5", DiscountAmountUnit.Percent, "0")
+                Discount = new Discount("15", DueFrom.InvoiceDate, "5", DiscountAmountUnit.Percent, "0")
             };
 
 		    var response = client.ExecuteOperations(new[] { new CreateAPTermOperation(session, apterm) }, CancellationToken.None).Result;
@@ -83,6 +84,31 @@ namespace TestHarness
 			response = client.ExecuteOperations(new[] { new GetEntityOperation<IntacctARTerm>(session, "NET15OfMonth") }, CancellationToken.None).Result;
 			response = client.ExecuteOperations(new[] { new GetEntityOperation<IntacctARTerm>(session, "NET30") }, CancellationToken.None).Result;
 			response = client.ExecuteOperations(new[] { new GetEntityOperation<IntacctARTerm>(session, "NET60") }, CancellationToken.None).Result;
+            */
+
+		    var path = @"somepath";
+		    var extension = Path.GetExtension(path);
+		    var bytes = File.ReadAllBytes(path);
+		    var encodedFile = Convert.ToBase64String(bytes);
+
+            var attachment = new Attachment()
+            {
+                Name = "Doc1",
+                FileExtension = "jpg",
+                Data = encodedFile
+            };
+
+		    var attachments = new List<Attachment>() { attachment };
+		    var document = new IntacctSupportingDocument()
+		    {
+                Name = "Hey supporting Doc 1",
+                Id = "101",
+                Description = "This is a document description",
+                FolderName = "Certs",
+                Attachments = attachments
+		    };
+
+		    var response = client.ExecuteOperations(new[] { new CreateSupportingDocumentOperation(session, document),  }, CancellationToken.None).Result;
 
 		    Console.ReadLine();
 		}

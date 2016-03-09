@@ -96,7 +96,7 @@ namespace Intacct
 			                           new XElement("password", serviceCredential.Password),
 			                           new XElement("controlid", requestId),
 			                           new XElement("uniqueid", "false"),
-			                           new XElement("dtdversion", "3.0"));
+			                           new XElement("dtdversion", "2.1"));
 			return control;
 		}
 
