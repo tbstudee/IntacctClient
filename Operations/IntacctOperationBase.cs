@@ -41,7 +41,7 @@ namespace Intacct.Operations
 			_session = session;
 		}
 
-		public XElement GetOperationElement()
+		public virtual XElement GetOperationElement()
 		{
 			return new XElement("operation",
 								CreateAuthElement(),
@@ -76,7 +76,7 @@ namespace Intacct.Operations
 
 		protected abstract IntacctOperationResult<T> ProcessResponseData(XElement responseData);
 
-		private XElement CreateAuthElement()
+		protected XElement CreateAuthElement()
 		{
 			var inner = (_session != null)
 				? CreateAuthSessionElement(_session)

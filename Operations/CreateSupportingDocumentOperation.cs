@@ -6,7 +6,7 @@ namespace Intacct.Operations
     public class CreateSupportingDocumentOperation : IntacctAuthenticatedOperationBase<string>
     {
         private readonly IntacctSupportingDocument _document;
-        public CreateSupportingDocumentOperation(IIntacctSession session,  IntacctSupportingDocument document) : base(session, "create_supdoc", "key", true)
+        public CreateSupportingDocumentOperation(IIntacctSession session,  IntacctSupportingDocument document) : base(session, "create_supdoc", "key", mayHaveEmptyResult: true)
         {
             _document = document;
         }

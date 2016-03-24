@@ -12,40 +12,41 @@ namespace Intacct.Operations
 {
     public class UpdateEntityOperation<TEntity> : IntacctAuthenticatedOperationBase<TEntity> where TEntity : IntacctObject
     {
-        private readonly string _entityName;
-        private readonly string _entityId;
-        private readonly bool _isExternalKey;
+        private readonly TEntity _entity;
 
-        public UpdateEntityOperation(IIntacctSession session, string entityId, string responseElementName, bool isExternalKey = false) : base(session, "update", responseElementName, mayHaveEmptyResult: true)
+        public UpdateEntityOperation(IIntacctSession session, TEntity entity) : base(session, "update", "data", mayHaveEmptyResult: false)
         {
-            if (entityId == null) throw new ArgumentNullException(nameof(entityId));
-            if (string.IsNullOrWhiteSpace(entityId)) throw new ArgumentException($"Argument {nameof(entityId)} may not be empty.", nameof(entityId));
+            _entity = entity;
+        }
 
-            _entityName = GetObjectName<TEntity>();
-            _entityId = entityId;
-            _isExternalKey = isExternalKey;
+        public override XElement GetOperationElement()
+        {
+            return new XElement("operation",
+                    CreateAuthElement(),
+                    new XElement("content",
+                                 new XElement("function",
+                                              new XAttribute("controlid", Id),
+                                              new XElement(FunctionName,
+                                                    new XElement(GetObjectName(),
+                                                           CreateFunctionContents()?.Cast<object>())))));
         }
 
         protected override XObject[] CreateFunctionContents()
         {
-            throw new NotImplementedException();
+            return _entity.ToXmlElements();
         }
 
         protected override IntacctOperationResult<TEntity> ProcessResponseData(XElement responseData)
         {
-            var entityElement = responseData.Element(_entityName);
-
-            var entity = (TEntity) Activator.CreateInstance(typeof (TEntity), entityElement);
-
-            return new IntacctOperationResult<TEntity>(entity);
+            return new IntacctOperationResult<TEntity>(_entity);
         }
 
-        private string GetObjectName<T>()
+        private string GetObjectName()
         {
-            var attribute = typeof(T).GetTypeInfo().GetCustomAttribute<IntacctNameAttribute>();
+            var attribute = typeof(TEntity).GetTypeInfo().GetCustomAttribute<IntacctNameAttribute>();
             if (attribute == null)
             {
-                throw new Exception($"Unable to create \"update\" request for entity of type {typeof(T).Name} because it is missing the {nameof(IntacctNameAttribute)} attribute.");
+                throw new Exception($"Unable to create \"update\" request for entity of type {typeof(TEntity).Name} because it is missing the {nameof(IntacctNameAttribute)} attribute.");
             }
 
             return attribute.Name;
