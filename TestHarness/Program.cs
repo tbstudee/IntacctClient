@@ -30,8 +30,8 @@ namespace TestHarness
 
 			Console.WriteLine($"Session created, ID: {session.SessionId}, Endpoint: {session.EndpointUri}");
 
-			// create customer
-            /*
+            // create customer
+            
 			var customer = new IntacctCustomer("C0021", "MT Test " + Guid.NewGuid())
 				               {
 					               ExternalId = "1337",
@@ -47,74 +47,72 @@ namespace TestHarness
 			Console.WriteLine($"Customer retrieved: {response.Success}");
 			if (!response.Success) return;
 
-			// create invoice
-			var invoice = new IntacctInvoice(customer.Id, new IntacctDate(1, 1, 2015), new IntacctDate(1, 1, 2015));
-			var lineItem = IntacctLineItem.CreateWithAccountNumber("2000", 15);
-			lineItem.Memo = "Services rendered";
-			invoice.Items.Add(lineItem);
-			response = client.ExecuteOperations(new[] { new CreateInvoiceOperation(session, invoice) }, CancellationToken.None).Result;
+			//// create invoice
+			//var invoice = new IntacctInvoice(customer.Id, new IntacctDate(1, 1, 2015), new IntacctDate(1, 1, 2015));
+			//var lineItem = IntacctLineItem.CreateWithAccountNumber("2000", 15);
+			//lineItem.Memo = "Services rendered";
+			//invoice.Items.Add(lineItem);
+			//response = client.ExecuteOperations(new[] { new CreateInvoiceOperation(session, invoice) }, CancellationToken.None).Result;
 
-			Console.WriteLine($"Invoice created: {response.Success}");
-            */
+			//Console.WriteLine($"Invoice created: {response.Success}");
+ 
+   //         var arterm = new IntacctARTerm()
+   //         {
+   //             Name = "NET15OfMonthWithDiscount",
+   //             Description = "NET 15 of month test",
+   //             Status = TermStatus.Active,
+   //             Terms = new Terms("15", DueFrom.OfFifthMonth),
+   //             DiscountCalculatedOn = DiscountCalculatedOn.InvoiceTotalWithAddedCharges,
+   //             Discount = new Discount("15", DueFrom.OfSecondMonth, "5", DiscountAmountUnit.Percent, "0")
+   //         };
+   //         var apterm = new IntacctAPTerm()
+   //         {
+   //             Name = "NET15OfMonthWithDiscount",
+   //             Description = "NET 15 of month AP test",
+   //             Status = TermStatus.Active,
+   //             Terms = new Terms("15", DueFrom.OfFifthMonth),
+   //             DiscountCalculatedOn = APDiscountCalculatedOn.BillTotalIncludingAllCharges,
+   //             Discount = new Discount("15", DueFrom.InvoiceDate, "5", DiscountAmountUnit.Percent, "0")
+   //         };
 
-            /*
-            var arterm = new IntacctARTerm()
-            {
-                Name = "NET15OfMonthWithDiscount",
-                Description = "NET 15 of month test",
-                Status = TermStatus.Active,
-                Terms = new Terms("15", DueFrom.OfFifthMonth),
-                DiscountCalculatedOn = DiscountCalculatedOn.InvoiceTotalWithAddedCharges,
-                Discount = new Discount("15", DueFrom.OfSecondMonth, "5", DiscountAmountUnit.Percent, "0")
-            };
-            var apterm = new IntacctAPTerm()
-            {
-                Name = "NET15OfMonthWithDiscount",
-                Description = "NET 15 of month AP test",
-                Status = TermStatus.Active,
-                Terms = new Terms("15", DueFrom.OfFifthMonth),
-                DiscountCalculatedOn = APDiscountCalculatedOn.BillTotalIncludingAllCharges,
-                Discount = new Discount("15", DueFrom.InvoiceDate, "5", DiscountAmountUnit.Percent, "0")
-            };
+		 //   var response = client.ExecuteOperations(new[] { new CreateAPTermOperation(session, apterm) }, CancellationToken.None).Result;
 
-		    var response = client.ExecuteOperations(new[] { new CreateAPTermOperation(session, apterm) }, CancellationToken.None).Result;
+			//response = client.ExecuteOperations(new[] { new GetEntityOperation<IntacctAPTerm>(session, "NET15OfMonthWithDiscount") }, CancellationToken.None).Result;
 
-			response = client.ExecuteOperations(new[] { new GetEntityOperation<IntacctAPTerm>(session, "NET15OfMonthWithDiscount") }, CancellationToken.None).Result;
+			//response = client.ExecuteOperations(new[] { new GetEntityOperation<IntacctARTerm>(session, "NET15OfMonth") }, CancellationToken.None).Result;
+			//response = client.ExecuteOperations(new[] { new GetEntityOperation<IntacctARTerm>(session, "NET30") }, CancellationToken.None).Result;
+			//response = client.ExecuteOperations(new[] { new GetEntityOperation<IntacctARTerm>(session, "NET60") }, CancellationToken.None).Result;
+ 
 
-			response = client.ExecuteOperations(new[] { new GetEntityOperation<IntacctARTerm>(session, "NET15OfMonth") }, CancellationToken.None).Result;
-			response = client.ExecuteOperations(new[] { new GetEntityOperation<IntacctARTerm>(session, "NET30") }, CancellationToken.None).Result;
-			response = client.ExecuteOperations(new[] { new GetEntityOperation<IntacctARTerm>(session, "NET60") }, CancellationToken.None).Result;
-            */
+            //      throw new Exception("your own test code");
+            //var path = @"path";
+            //var extension = Path.GetExtension(path);
+            //var bytes = File.ReadAllBytes(path);
+            //var encodedFile = Convert.ToBase64String(bytes);
 
-            throw new Exception("your own test code");
-		    var path = @"path";
-		    var extension = Path.GetExtension(path);
-		    var bytes = File.ReadAllBytes(path);
-		    var encodedFile = Convert.ToBase64String(bytes);
+            //      var attachment = new Attachment()
+            //      {
+            //          Name = "Doc2",
+            //          FileExtension = "jpg",
+            //          Data = encodedFile
+            //      };
 
-            var attachment = new Attachment()
-            {
-                Name = "Doc2",
-                FileExtension = "jpg",
-                Data = encodedFile
-            };
+            //var attachments = new List<Attachment>() { attachment };
+            //var document = new IntacctSupportingDocument()
+            //{
+            //          Name = "Hey supporting Doc 2",
+            //          Id = "102",
+            //          Description = "This is a document 2 description",
+            //          FolderName = "Certs",
+            //          Attachments = attachments
+            //};
 
-		    var attachments = new List<Attachment>() { attachment };
-		    var document = new IntacctSupportingDocument()
-		    {
-                Name = "Hey supporting Doc 2",
-                Id = "102",
-                Description = "This is a document 2 description",
-                FolderName = "Certs",
-                Attachments = attachments
-		    };
+            //var response = client.ExecuteOperations(new[] { new CreateSupportingDocumentOperation(session, document),  }, CancellationToken.None).Result;
 
-		    var response = client.ExecuteOperations(new[] { new CreateSupportingDocumentOperation(session, document),  }, CancellationToken.None).Result;
+            //Console.ReadLine();
+        }
 
-		    Console.ReadLine();
-		}
-
-		private static TestHarnessSettings LoadSettings()
+        private static TestHarnessSettings LoadSettings()
 		{
 			var settings = new TestHarnessSettings();
 			if (File.Exists("Settings.json"))

@@ -20,6 +20,7 @@ namespace Intacct.Entities
 		public string ExternalId { get; set; }
 
 		public IntacctContact PrimaryContact { get; set; }
+        public IntacctContact ContactInfo { get; set; }
 
 		/// <summary>
 		///		Create a new customer record.
@@ -55,11 +56,15 @@ namespace Intacct.Entities
                                    new XElement("termname", TermName),
                                    new XElement("custrepid", CustRepId),
                                    new XElement("accountlabel", AccountLabel),
-                                   new XElement("externalid", ExternalId),
-                                   new XElement("primary", PrimaryContact?.ToXmlElements().Cast<object>()),
+                                   new XElement("externalid", ExternalId)
                                };
 
-			return elements.ToArray();
+            if (PrimaryContact != null)
+            {
+                elements.Add(new XElement("primary", new XElement("contact", PrimaryContact.ToXmlElements().Cast<object>())));
+            }
+
+            return elements.ToArray();
 		}
 	}
 }

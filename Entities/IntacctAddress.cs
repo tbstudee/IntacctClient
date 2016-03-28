@@ -24,6 +24,8 @@ namespace Intacct.Entities
 			this.SetPropertyValue(x => IsoCountryCode, data);
 		}
 
+        public IntacctAddress() { }
+
 		internal override XObject[] ToXmlElements()
 		{
 			return new XObject[]
