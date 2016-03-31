@@ -61,7 +61,7 @@ namespace Intacct.Entities
 
             if (PrimaryContact != null)
             {
-                elements.Add(new XElement("primary", new XElement("contact", PrimaryContact.ToXmlElements().Cast<object>())));
+                elements.Add(new XElement("contactinfo", new XElement("contact", PrimaryContact.ToXmlElements().Cast<object>())));
             }
 
             return elements.ToArray();

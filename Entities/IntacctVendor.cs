@@ -14,8 +14,11 @@ namespace Intacct.Entities
         public string Id { get; set; }
         public string Name { get; set; }
         public string TermName { get; set; }
-        public IntacctContact PrimaryContact { get; set; }
+        public string GLAccountNo { get; set; }
+        public string Status { get; set; }
+        public string ExternalId { get; set; }
         public IntacctContact PayToContact { get; set; }
+        public IntacctContact ContactInfo { get; set; }
 
         public IntacctVendor(string id, string name)
         {
@@ -28,17 +31,18 @@ namespace Intacct.Entities
             this.SetPropertyValue(x => Id, data);
             this.SetPropertyValue(x => Name, data);
             this.SetPropertyValue(x => TermName, data);
-
-            var primaryContactElement = data.Element("primary");
-            if (primaryContactElement != null && primaryContactElement.HasElements)
-            {
-                PrimaryContact = new IntacctContact(primaryContactElement);
-            }
+            this.SetPropertyValue(x => ExternalId, data);
 
             var payToContactElement = data.Element("payto");
             if (payToContactElement != null && payToContactElement.HasElements)
             {
                 PayToContact = new IntacctContact(payToContactElement);
+            }
+
+            var contactInfoElement = data.Element("contactinfo");
+            if (contactInfoElement != null && contactInfoElement.HasElements)
+            {
+                ContactInfo = new IntacctContact(contactInfoElement);
             }
 
         }
@@ -50,9 +54,23 @@ namespace Intacct.Entities
                 new XElement("vendorid", Id),
                 new XElement("name", Name),
                 new XElement("termname", TermName),
-                new XElement("primary", PrimaryContact?.ToXmlElements().Cast<object>()),
+                new XElement("glaccountno", GLAccountNo),
+                new XElement("status", Status),
+                new XElement("externalid", ExternalId)
 
             };
+
+            if (PayToContact != null)
+            {
+                elements.Add(new XElement("payto", new XElement("contact",
+                    PayToContact.ToXmlElements().Cast<object>())));
+            }
+
+            if (ContactInfo != null)
+            {
+                elements.Add(new XElement("contactinfo", new XElement("contact",
+                    ContactInfo.ToXmlElements().Cast<object>())));
+            }
 
             return elements.ToArray();
         }

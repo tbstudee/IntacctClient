@@ -62,6 +62,7 @@
     <Compile Include="Operations\CreateCustomerOperation.cs" />
     <Compile Include="Operations\CreateInvoiceOperation.cs" />
     <Compile Include="Operations\CreateSupportingDocumentOperation.cs" />
+    <Compile Include="Operations\CreateVendorOperation.cs" />
     <Compile Include="Operations\GetEntityOperation.cs" />
     <Compile Include="Operations\UpdateEntityOperation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
