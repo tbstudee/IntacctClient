@@ -10,6 +10,8 @@ namespace Intacct.Entities
 		public decimal Amount { get; }
 
 		public string Memo { get; set; }
+        public string LocationId { get; set; }
+        public string DepartmentId { get; set; }
 
 		public static IntacctLineItem CreateWithAccountNumber(string accountNumber, decimal amount)
 		{
@@ -33,6 +35,8 @@ namespace Intacct.Entities
 					       GetAccountXmlElement(),
 					       new XElement("amount", Amount),
 						   new XElement("memo", Memo ?? ""), 
+                           new XElement("locationid", LocationId),
+                           new XElement("departmentid", DepartmentId)
 				       };
 		}
 

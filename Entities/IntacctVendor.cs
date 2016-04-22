@@ -57,7 +57,6 @@ namespace Intacct.Entities
                 new XElement("glaccountno", GLAccountNo),
                 new XElement("status", Status),
                 new XElement("externalid", ExternalId)
-
             };
 
             if (PayToContact != null)

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -13,6 +14,7 @@ namespace Intacct.Entities
 
 		public ICollection<IntacctLineItem> Items { get; }
 
+	    public IntacctInvoice(string customerId, IntacctDate dateCreated) : this(customerId, dateCreated, null) { }
 		public IntacctInvoice(string customerId, IntacctDate dateCreated, IntacctDate dateDue)
 		{
 			CustomerId = customerId;
@@ -32,7 +34,7 @@ namespace Intacct.Entities
 				       {
 					       new XElement("customerid", CustomerId),
 					       new XElement("datecreated", DateCreated.ToXmlElements().Cast<object>()),
-					       new XElement("datedue", DateDue.ToXmlElements().Cast<object>()),
+					       //new XElement("datedue", DateDue.ToXmlElements().Cast<object>()),
 					       new XElement("invoiceitems", Items.Select(item => new XElement("lineitem", item.ToXmlElements().Cast<object>()))),
 				       };
 		}
