@@ -59,6 +59,7 @@
     <Compile Include="IntacctServiceException.cs" />
     <Compile Include="Operations\CreateAPTermOperation.cs" />
     <Compile Include="Operations\CreateARTermOperation.cs" />
+    <Compile Include="Operations\CreateContactOperation.cs" />
     <Compile Include="Operations\CreateCustomerOperation.cs" />
     <Compile Include="Operations\CreateInvoiceOperation.cs" />
     <Compile Include="Operations\CreateSupportingDocumentOperation.cs" />
