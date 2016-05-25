@@ -37,7 +37,7 @@ namespace Intacct.Entities
 					       new XElement("datecreated", DateCreated.ToXmlElements().Cast<object>()),
                            new XElement("datedue", DateDue.ToXmlElements().Cast<object>()),
                            new XElement("invoiceno", InvoiceNo),
-                           new XElement("shipto", ShipTo),
+                           new XElement("shipto", new object[] { new XElement("contactname", ShipTo) }),
 					       new XElement("invoiceitems", Items.Select(item => new XElement("lineitem", item.ToXmlElements().Cast<object>()))),
 				       };
 		}
