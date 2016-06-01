@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using Intacct.Infrastructure;
 
 namespace Intacct.Entities
 {
+    [IntacctName("invoice")]
 	public class IntacctInvoice : IntacctObject
 	{
 		public string CustomerId { get; }
