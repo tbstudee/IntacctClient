@@ -5,6 +5,7 @@ using Intacct.Infrastructure;
 
 namespace Intacct.Entities
 {
+    [IntacctName("contact")]
 	public class IntacctContact : IntacctObject
 	{
 		[IntacctName("contactname")]

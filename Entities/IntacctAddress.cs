@@ -21,7 +21,7 @@ namespace Intacct.Entities
 			this.SetPropertyValue(x => State, data);
 			this.SetPropertyValue(x => Zip, data);
 			this.SetPropertyValue(x => Country, data);
-			this.SetPropertyValue(x => IsoCountryCode, data);
+			this.SetPropertyValue(x => IsoCountryCode, data, true);
 		}
 
         public IntacctAddress() { }
