@@ -41,7 +41,7 @@ namespace Intacct.Entities
 
 		public IntacctContact(XElement data)
 		{
-			this.SetPropertyValue(x => Name, data);
+			this.SetPropertyValue(x => Name, data, isOptional: true);
 			this.SetPropertyValue(x => PrintAs, data, isOptional: true);
 			this.SetPropertyValue(x => Prefix, data, isOptional: true);
 			this.SetPropertyValue(x => FirstName, data, isOptional: true);

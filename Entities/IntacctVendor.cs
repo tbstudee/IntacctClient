@@ -8,6 +8,7 @@ using Intacct.Infrastructure;
 
 namespace Intacct.Entities
 {
+    [IntacctName("vendor")]
     public class IntacctVendor : IntacctObject
     {
         [IntacctName("vendorid")]
@@ -20,6 +21,8 @@ namespace Intacct.Entities
         public IntacctContact PayToContact { get; set; }
         public IntacctContact ContactInfo { get; set; }
 
+        public string DisplayTermDiscount { get; set; }
+
         public IntacctVendor(string id, string name)
         {
             Id = id;
@@ -31,7 +34,7 @@ namespace Intacct.Entities
             this.SetPropertyValue(x => Id, data);
             this.SetPropertyValue(x => Name, data);
             this.SetPropertyValue(x => TermName, data);
-            this.SetPropertyValue(x => ExternalId, data);
+            this.SetPropertyValue(x => ExternalId, data, true);
 
             var payToContactElement = data.Element("payto");
             if (payToContactElement != null && payToContactElement.HasElements)
@@ -45,6 +48,7 @@ namespace Intacct.Entities
                 ContactInfo = new IntacctContact(contactInfoElement);
             }
 
+            this.SetPropertyValue(x => DisplayTermDiscount, data);
         }
 
         internal override XObject[] ToXmlElements()
@@ -70,6 +74,8 @@ namespace Intacct.Entities
                 elements.Add(new XElement("contactinfo", new XElement("contact",
                     ContactInfo.ToXmlElements().Cast<object>())));
             }
+
+            elements.Add(new XElement("displaytermdiscount", DisplayTermDiscount));
 
             return elements.ToArray();
         }
