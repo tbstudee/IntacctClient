@@ -30,6 +30,12 @@ namespace Intacct.Operations
 			Value = value;
 		}
 
+	    public IntacctOperationResult()
+	    {
+	        AuthSuccess = true;
+	        OperationSuccess = true;
+	    }
+
 		public static IntacctOperationResult<T> CreateFailure(IEnumerable<IntacctError> errors)
 		{
 			return new IntacctOperationResult<T>(default(T)) { OperationSuccess = false, Errors = errors };

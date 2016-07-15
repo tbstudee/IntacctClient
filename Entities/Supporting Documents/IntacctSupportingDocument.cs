@@ -11,6 +11,11 @@ namespace Intacct.Entities.Supporting_Documents
     [IntacctName("supdoc")]
     public class IntacctSupportingDocument : IntacctObject
     {
+        public IntacctSupportingDocument(string recordNo)
+        {
+            RecordNo = recordNo;
+        }
+
         public string RecordNo { get; private set; }
         public string Id { get; set; }
         public string Name { get; set; }

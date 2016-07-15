@@ -1,5 +1,3 @@
-using System.Collections;
-using System.ServiceModel.Description;
 using System.Xml.Linq;
 
 namespace Intacct.Entities
