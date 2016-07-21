@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Intacct.Entities;
+using Intacct.Entities.Reports;
 
 namespace Intacct.Operations
 {
@@ -38,29 +39,15 @@ namespace Intacct.Operations
             };
         }
 
-        public IEnumerable<T> Results { get; set; }
-
         protected override IntacctOperationResult<T> ProcessResponseData(XElement responseData)
         {
-            IntacctOperationResult<T> opResult = null;
+            var result = responseData.Descendants("data").FirstOrDefault();
 
-            var result = responseData.Descendants("data").Single();
-            var status = result.Elements("status").FirstOrDefault();
+            var status = result.Elements("STATUS").FirstOrDefault() ?? 
+                responseData.Elements("report").Elements("STATUS").Single();
+
+            var opResult = new ReadMore<T>(status.Value, responseData);
             
-            if (status != null)
-            {
-                opResult =
-                    (IntacctOperationResult<T>) Activator.CreateInstance(typeof(IntacctOperationResult<T>), status);
-            }
-            else
-            {
-                var items = result.Elements("data").ToList();
-                foreach (var item in items)
-                {
-                    
-                }
-            }
-
             return opResult;
         }
     }

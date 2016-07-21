@@ -10,8 +10,8 @@ namespace Intacct.Entities
 {
     public class IntacctReadReport
     {
-        public string ReportId { get; set; }
-        public string Status { get; set; }
+        public string ReportId { get; private set; }
+        public string Status { get; private set; }
 
         public IntacctReadReport(string reportId, string status)
         {
