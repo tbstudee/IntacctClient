@@ -59,7 +59,7 @@ namespace Intacct.Entities.Reports
             _status = "";
 
             var readMoreResult =
-                _client.ExecuteOperations(new[] {new ReadMoreOperation<CustomAging>(_session, _reportId)},
+                _client.ExecuteOperations(new[] {new ReadMoreOperation<T>(_session, _reportId)},
                     CancellationToken.None).Result;
 
             if (readMoreResult.OperationResults.Any())
@@ -83,8 +83,11 @@ namespace Intacct.Entities.Reports
                                 var elements = result.Data;
                                 foreach (var element in elements)
                                 {
-                                    var item = (T) Activator.CreateInstance(typeof(T), element);
-                                    Value.Add(item);
+                                    if (element.HasElements)
+                                    {
+                                        var item = (T) Activator.CreateInstance(typeof(T), element);
+                                        Value.Add(item);
+                                    }
                                 }
                                 Read();
                             }

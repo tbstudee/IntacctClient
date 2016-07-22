@@ -38,8 +38,33 @@ namespace Intacct.Infrastructure
 
 			if (property.PropertyType == typeof(int))
 			{
-				property.SetValue(target, Convert.ToInt32(data.Value), null);
+			    int intVal = 0;
+                if(int.TryParse(data.Value, out intVal))
+			    {
+			        property.SetValue(target, intVal, null);
+			    }
+			    return;
 			}
+
+		    if (property.PropertyType == typeof(decimal))
+		    {
+		        decimal decVal = 0.0M;
+		        if (decimal.TryParse(data.Value, out decVal))
+		        {
+		            property.SetValue(target, decVal, null);
+		        }
+		        return;
+		    }
+
+		    if (property.PropertyType == typeof(DateTime))
+		    {
+		        DateTime dateVal;
+		        if (DateTime.TryParse(data.Value, out dateVal))
+		        {
+		            property.SetValue(target, dateVal, null);
+		        }
+		        return;
+		    }
 
 			throw new ArgumentException($"Property type {property.PropertyType.Name} is not yet supported.");
 		}

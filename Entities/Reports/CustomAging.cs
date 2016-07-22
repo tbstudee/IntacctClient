@@ -11,6 +11,7 @@ namespace Intacct.Entities.Reports
     [IntacctName("CustomAging")]
     public class CustomAging
     {
+        protected CustomAging() { }
         public CustomAging(XElement data)
         {
             this.SetPropertyValue(x => Aging030, data);
@@ -28,7 +29,7 @@ namespace Intacct.Entities.Reports
             this.SetPropertyValue(x => RecordId, data);
             this.SetPropertyValue(x => WhenDue, data);
         }
-        public string Status { get; set; }
+
         [IntacctName("AGING0_30")]
         public decimal Aging030 { get; set; }
         [IntacctName("AGING31_60")]
@@ -39,14 +40,23 @@ namespace Intacct.Entities.Reports
         public decimal Aging91120 { get; set; }
         [IntacctName("AGING121_")]
         public decimal Aging121 { get; set; }
+        [IntacctName("TOTALENTERED")]
         public decimal TotalEntered { get; set; }
+        [IntacctName("TOTALDUE")]
         public decimal TotalDue { get; set; }
+        [IntacctName(("TOTALPAID"))]
         public decimal TotalPaid { get; set; }
+        [IntacctName("CUSTOMERID")]
         public decimal CustomerId { get; set; }
+        [IntacctName("CUSTENTITY")]
         public string CustEntity { get; set; }
+        [IntacctName("CUSTOMERNAME")]
         public string CustomerName { get; set; }
+        [IntacctName("WHENCREATED")]
         public DateTime WhenCreated { get; set; }
+        [IntacctName("RECORDID")]
         public int RecordId { get; set; }
+        [IntacctName("WHENDUE")]
         public DateTime WhenDue { get; set; }
         
     }
