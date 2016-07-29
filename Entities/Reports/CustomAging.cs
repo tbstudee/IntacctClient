@@ -47,7 +47,7 @@ namespace Intacct.Entities.Reports
         [IntacctName(("TOTALPAID"))]
         public decimal TotalPaid { get; set; }
         [IntacctName("CUSTOMERID")]
-        public decimal CustomerId { get; set; }
+        public string CustomerId { get; set; }
         [IntacctName("CUSTENTITY")]
         public string CustEntity { get; set; }
         [IntacctName("CUSTOMERNAME")]
