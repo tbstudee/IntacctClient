@@ -17,7 +17,7 @@ namespace Intacct.Operations
 			if (entityId == null) throw new ArgumentNullException(nameof(entityId));
 			if (string.IsNullOrWhiteSpace(entityId)) throw new ArgumentException($"Argument {nameof(entityId)} may not be empty.", nameof(entityId));
 
-			_entityName = GetObjectName<TEntity>();
+			_entityName = LambdaExtensions.GetObjectName<TEntity>();
 			_entityId = entityId;
 			_isExtenalKey = isExtenalKey;
 		}
@@ -41,15 +41,6 @@ namespace Intacct.Operations
 			return new IntacctOperationResult<TEntity>(entity);
 		}
 
-		private string GetObjectName<T>()
-		{
-			var attribute = typeof(T).GetTypeInfo().GetCustomAttribute<IntacctNameAttribute>();
-			if (attribute == null)
-			{
-				throw new Exception($"Unable to create \"get\" request for entity of type {typeof(T).Name} because it is missing the {nameof(IntacctNameAttribute)} attribute.");
-			}
 
-			return attribute.Name;
-		}
 	}
 }

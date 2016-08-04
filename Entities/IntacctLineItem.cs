@@ -1,13 +1,27 @@
 ﻿using System;
 using System.Xml.Linq;
+using Intacct.Infrastructure;
 
 namespace Intacct.Entities
 {
 	public class IntacctLineItem : IntacctObject
 	{
+	    public IntacctLineItem(XElement data)
+	    {
+	        this.SetPropertyValue(x => AccountNumber, data);
+	        this.SetPropertyValue(x => AccountLabel, data, true);
+	        this.SetPropertyValue(x => Amount, data);
+	        this.SetPropertyValue(x => Memo, data);
+	        this.SetPropertyValue(x => LocationId, data);
+	        this.SetPropertyValue(x => DepartmentId, data);
+	    }
+
+        [IntacctName("glaccountno")]
 		public string AccountNumber { get; private set; }
+        [IntacctName("accountlabel")]
 		public string AccountLabel { get; private set; }
-		public decimal Amount { get; }
+        
+		public decimal Amount { get; set; }
 
 		public string Memo { get; set; }
         public string LocationId { get; set; }
@@ -23,6 +37,7 @@ namespace Intacct.Entities
 			return new IntacctLineItem(amount) { AccountLabel = accountLabel };
 		}
 
+        
 		private IntacctLineItem(decimal amount)
 		{
 			Amount = amount;

@@ -71,6 +71,7 @@
     <Compile Include="Operations\CreateSupportingDocumentOperation.cs" />
     <Compile Include="Operations\CreateVendorOperation.cs" />
     <Compile Include="Operations\GetEntityOperation.cs" />
+    <Compile Include="Operations\ReadByQueryOperation.cs" />
     <Compile Include="Operations\ReadMoreOperation.cs" />
     <Compile Include="Operations\ReadReportOperation.cs" />
     <Compile Include="Operations\UpdateEntityOperation.cs" />
